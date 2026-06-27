@@ -1,6 +1,6 @@
 #include <DHT.h>
 
-#define DHTTYPE DHT22
+#define DHTTYPE DHT11
 
 const int dht_pin = 25;
 const int trig_pin = 5;
@@ -58,12 +58,12 @@ void loop() {
   humidity =  dht.readHumidity();
   
 
-  // Error checking. This is to check if ESP32 is getting reading from the microcontroller
-   if (isnan(humidity) || isnan(temperature))
-  {
-    Serial.println("Error reading from DHT sensor");
-    return;
-  }
+  // // Error checking. This is to check if ESP32 is getting reading from the microcontroller
+  //  if (isnan(humidity) || isnan(temperature))
+  // {
+  //   Serial.println("Error reading from DHT sensor");
+  //   return;
+  // }
 
   // Getting analog reading from the LDR sensor
   ldr_value = analogRead(ldr_pin);
@@ -81,7 +81,7 @@ void loop() {
   Serial.print("Light level: "); 
   Serial.println(ldr_value);
   
-  if(ldr_value < 300 ) 
+  if(ldr_value > 2000 ) 
     Serial.println("Its dark");
   else 
     Serial.println("Its bright");
